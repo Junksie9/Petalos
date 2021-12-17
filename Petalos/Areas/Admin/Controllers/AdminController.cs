@@ -61,7 +61,7 @@ namespace Petalos.Controllers
 
         [Route("admin/EditarFlor")]
         [HttpGet]
-        public IActionResult EditarFlor(uint id)
+        public IActionResult EditarFlor(int id)
         {
             FloresViewModel vm = new FloresViewModel();
             var flor = Context.Datosflores.FirstOrDefault(x=>x.Idflor == id);
