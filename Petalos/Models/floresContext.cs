@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
+#nullable disable
+
 namespace Petalos.Models
 {
     public partial class floresContext : DbContext
@@ -21,54 +23,65 @@ namespace Petalos.Models
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-            {            
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+               
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasCharSet("utf8mb4");
+
             modelBuilder.Entity<Datosflores>(entity =>
             {
-                entity.HasKey(e => e.Idflor);
+                entity.HasKey(e => e.Idflor)
+                    .HasName("PRIMARY");
 
                 entity.ToTable("datosflores");
+
+                entity.HasCharSet("latin1")
+                    .UseCollation("latin1_swedish_ci");
 
                 entity.Property(e => e.Idflor).HasColumnName("idflor");
 
                 entity.Property(e => e.Descripcion)
                     .IsRequired()
-                    .HasColumnName("descripcion")
-                    .HasColumnType("text");
+                    .HasColumnType("text")
+                    .HasColumnName("descripcion");
 
                 entity.Property(e => e.Nombre)
                     .IsRequired()
-                    .HasColumnName("nombre")
-                    .HasColumnType("varchar(45)");
+                    .HasMaxLength(45)
+                    .HasColumnName("nombre");
 
                 entity.Property(e => e.Nombrecientifico)
                     .IsRequired()
-                    .HasColumnName("nombrecientifico")
-                    .HasColumnType("varchar(100)");
+                    .HasMaxLength(100)
+                    .HasColumnName("nombrecientifico");
 
                 entity.Property(e => e.Nombrecomun)
                     .IsRequired()
-                    .HasColumnName("nombrecomun")
-                    .HasColumnType("varchar(200)");
+                    .HasMaxLength(200)
+                    .HasColumnName("nombrecomun");
 
                 entity.Property(e => e.Origen)
                     .IsRequired()
-                    .HasColumnName("origen")
-                    .HasColumnType("varchar(300)");
+                    .HasMaxLength(300)
+                    .HasColumnName("origen");
             });
 
             modelBuilder.Entity<Imagenesflores>(entity =>
             {
-                entity.HasKey(e => e.Idimagen);
+                entity.HasKey(e => e.Idimagen)
+                    .HasName("PRIMARY");
 
                 entity.ToTable("imagenesflores");
 
-                entity.HasIndex(e => e.Idflor)
-                    .HasName("FK_imagenesflores_1");
+                entity.HasCharSet("latin1")
+                    .UseCollation("latin1_swedish_ci");
+
+                entity.HasIndex(e => e.Idflor, "FK_imagenesflores_1");
 
                 entity.Property(e => e.Idimagen).HasColumnName("idimagen");
 
@@ -76,14 +89,18 @@ namespace Petalos.Models
 
                 entity.Property(e => e.Nombreimagen)
                     .IsRequired()
-                    .HasColumnName("nombreimagen")
-                    .HasColumnType("varchar(100)");
+                    .HasMaxLength(100)
+                    .HasColumnName("nombreimagen");
 
                 entity.HasOne(d => d.IdflorNavigation)
                     .WithMany(p => p.Imagenesflores)
                     .HasForeignKey(d => d.Idflor)
                     .HasConstraintName("FK_imagenesflores_1");
             });
+
+            OnModelCreatingPartial(modelBuilder);
         }
+
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

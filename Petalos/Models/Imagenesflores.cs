@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+#nullable disable
+
 namespace Petalos.Models
 {
     public partial class Imagenesflores
@@ -9,6 +11,6 @@ namespace Petalos.Models
         public string Nombreimagen { get; set; }
         public uint Idflor { get; set; }
 
-        public Datosflores IdflorNavigation { get; set; }
+        public virtual Datosflores IdflorNavigation { get; set; }
     }
 }

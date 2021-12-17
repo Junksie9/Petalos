@@ -21,7 +21,7 @@ namespace Petalos
             services.AddMvc();
             services.AddDbContext<floresContext>(options =>
             {
-                options.UseMySql("server=localhost; user=root; password=Nrx51987; database=flores");
+                options.UseMySql("server=localhost;user=root;password=Nrx51987;database=flores", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.26-mysql"));
             }
             );
         }

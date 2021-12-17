@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+#nullable disable
+
 namespace Petalos.Models
 {
     public partial class Datosflores
@@ -17,6 +19,6 @@ namespace Petalos.Models
         public string Descripcion { get; set; }
         public string Nombre { get; set; }
 
-        public ICollection<Imagenesflores> Imagenesflores { get; set; }
+        public virtual ICollection<Imagenesflores> Imagenesflores { get; set; }
     }
 }
