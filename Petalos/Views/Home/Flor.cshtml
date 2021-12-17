@@ -1,0 +1,41 @@
+﻿@model Petalos.Models.InfoViewModel
+@{
+    Layout = "_Layout";
+}
+
+<section class="post">
+    <h2>@Model.Datosflores.Nombre</h2>
+
+    <h4>Nombre científico o latino:</h4>
+    <p>@Model.Datosflores.Nombrecientifico</p>
+    <h4>Nombre común:</h4>
+    <p>@Model.Datosflores.Nombrecomun</p>
+    <h4>Origen:</h4>
+    <p>@Model.Datosflores.Origen</p>
+    <h4>Descripción:</h4>
+    <p>
+        @Model.Datosflores.Descripcion
+    </p>
+
+    <div id="imagenes">
+        @foreach (var f in Model.Datosflores.Imagenesflores)
+        {
+            <img title="@f.Nombreimagen" src="~/images/@(f.Nombreimagen)">
+        }
+    </div>
+</section>
+<aside>
+    <nav>
+        <h2>Menú</h2>
+        <ul>
+            @foreach (var item in Model.CuatroF)
+            {
+
+
+                <li><a href="~/@item.Nombre.Replace(" ","-")/Datos">@item.Nombre</a></li>
+            }
+        </ul>
+    </nav>
+</aside>
+
+

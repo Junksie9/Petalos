@@ -1,0 +1,31 @@
+﻿@model Petalos.Areas.Admin.Models.FloresViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+}
+<h2 class="titulo">Agregar una nueva flor</h2>
+<form method="post" action="~/Admin/AgregarFlor">
+    <label>Nombre:</label>
+    <input asp-for="Datosflores.Nombre" type="text" /><br />
+    <label>Nombre Cientifico:</label>
+    <input asp-for="Datosflores.Nombrecientifico" type="text" /><br />
+    <label>Nombre Común:</label>
+    <input asp-for="Datosflores.Nombrecomun" type="text" /><br />
+    <label>Origen:</label>
+    <input asp-for="Datosflores.Origen" type="text" /><br />
+    <label>Descripción:</label>
+    <textarea rows="5" asp-for="Datosflores.Descripcion"></textarea><br />
+
+    <input type="submit" value="Agregar" />
+    <a href="~/Admin">
+        <input type="button" value="Cancelar" />
+    </a>
+</form>
+
+<div id="popErrores" class="popup" runat="server">
+    <div>
+        <h1>Ha ocurrido un error:  @Html.ValidationSummary()</h1>
+        <p id="mensajeError"></p>
+        <input type="button" value="Aceptar" />
+    </div>
+</div>
