@@ -10,5 +10,7 @@ namespace Petalos.Areas.Admin.Models
     {
         public IEnumerable<Datosflores> df { get; set; }
         public Datosflores Datosflores { get; set; }
+
+        public Imagenesflores imagenesflores { get; set; }
     }
 }

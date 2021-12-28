@@ -19,13 +19,14 @@ namespace Petalos.Models
 
         public virtual DbSet<Datosflores> Datosflores { get; set; }
         public virtual DbSet<Imagenesflores> Imagenesflores { get; set; }
+        public virtual DbSet<Usuarios> Usuarios { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-               
+                
             }
         }
 
@@ -96,6 +97,29 @@ namespace Petalos.Models
                     .WithMany(p => p.Imagenesflores)
                     .HasForeignKey(d => d.Idflor)
                     .HasConstraintName("FK_imagenesflores_1");
+            });
+
+            modelBuilder.Entity<Usuarios>(entity =>
+            {
+                entity.ToTable("usuarios");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.NombreReal)
+                    .IsRequired()
+                    .HasMaxLength(45);
+
+                entity.Property(e => e.NombreUsuario)
+                    .IsRequired()
+                    .HasMaxLength(45);
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(128);
+
+                entity.Property(e => e.Rol)
+                    .IsRequired()
+                    .HasMaxLength(45);
             });
 
             OnModelCreatingPartial(modelBuilder);

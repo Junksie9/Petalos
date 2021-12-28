@@ -22,23 +22,13 @@
         <tr>
             <td>@f.Nombre</td>
             <td>
-                <a href='~/Admin/AgregarImagenes'>Agregar Imagenes</a>
-                <a href='~/Admin/EditarFlor'>Editar</a>
-                <a href='#'>Eliminar</a>
+                <a href='~/Admin/AgregarImagenes/@f.Idflor'>Agregar Imagenes</a>
+                <a href='~/Admin/EditarFlor/@f.Idflor'>Editar</a>
+                <a href='~/Admin/Eliminar/@f.Idflor'>Eliminar</a>
             </td>
         </tr>
         }
     </table>
-
-
-    <div id="popConfirmacion" class="popup" runat="server">
-        <div>
-            <h1>Por favor confirme:</h1>
-            <p id="mensajeConfirmacion" runat="server">¿Está seguro de eliminar los datos e imagenes de la flor seleccionada?</p>
-            <input type="button" value="Si" />
-            <input type="button" value="No" />
-        </div>
-    </div>
 
 </div>
 

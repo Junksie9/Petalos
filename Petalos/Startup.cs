@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Petalos.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Petalos
 {
@@ -19,6 +20,16 @@ namespace Petalos
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(25);
+                options.SlidingExpiration = true;
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
+                options.LogoutPath = "/Account/AccessDenied";
+                options.Cookie.Name = "PetalosSesion";
+            }
+            ); 
             services.AddDbContext<floresContext>(options =>
             {
                 options.UseMySql("server=localhost;user=root;password=Nrx51987;database=flores", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.26-mysql"));
@@ -36,6 +47,9 @@ namespace Petalos
 
             app.UseRouting();
             app.UseFileServer();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

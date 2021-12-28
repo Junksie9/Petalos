@@ -1,14 +1,21 @@
-﻿@{
+﻿@model Petalos.Areas.Admin.Models.FloresViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
     Layout = "_Layout";
 }
 <h2 class="titulo">Editar flor</h2>
-<form method="post" action="~/Admin/Editar">
-    <input type="hidden" />
-    <label>Nombre:</label><input type="text" /><br />
-    <label>Nombre Cientifico:</label><input type="text" /><br />
-    <label>Nombre Común:</label><input type="text" /><br />
-    <label>Origen:</label><input type="text" /><br />
-    <label>Descripción:</label><textarea rows="5"></textarea><br />
+<form method="post" action="~/Admin/EditarFlor/@Model.Datosflores.Idflor">
+    <input type="hidden" asp-for="Datosflores.Idflor"/>
+    <label>Nombre:</label>
+    <input type="text" asp-for="Datosflores.Nombre" /><br />
+    <label>Nombre Cientifico:</label>
+    <input type="text" asp-for="Datosflores.Nombrecientifico"/><br />
+    <label>Nombre Común:</label>
+    <input type="text" asp-for="Datosflores.Nombrecomun"/><br />
+    <label>Origen:</label>
+    <input type="text" asp-for="Datosflores.Origen"/><br />
+    <label>Descripción:</label>
+    <textarea rows="5" asp-for="Datosflores.Descripcion"></textarea><br />
 
     <input type="submit" value="Guardar" />
     <a href="~/Admin">
