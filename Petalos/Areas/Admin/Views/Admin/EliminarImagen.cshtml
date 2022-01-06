@@ -1,0 +1,17 @@
+﻿@model Petalos.Models.Imagenesflores
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+}
+<form method="post" action="~/Admin/AgregarImagenes/@Model.Idimagen/EliminarImagen/">
+    <div>
+        <h1>Por favor confirme:</h1>
+        <input type="hidden" asp-for="@Model.Idimagen" />
+        <input type="hidden" asp-for="@Model.Nombreimagen" />
+        <p id="mensajeConfirmacion" runat="server">¿Está seguro de eliminar los datos de la imagen con ID @Model.Idimagen seleccionada?</p>
+        <input type="submit" value="Si" />
+        <a href="~/Admin">
+            <input type="button" value="No" />
+        </a>
+    </div>
+</form>

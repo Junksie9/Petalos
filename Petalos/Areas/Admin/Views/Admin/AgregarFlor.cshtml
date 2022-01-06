@@ -21,10 +21,10 @@
         <input type="button" value="Cancelar" />
     </a>
 </form>
-
+<p> @Html.ValidationSummary() </p>
 <div id="popErrores" class="popup" runat="server">
     <div>
-        <h1>Ha ocurrido un error:  @Html.ValidationSummary()</h1>
+        <h1></h1>
         <p id="mensajeError">Errors</p>
         <input type="button" value="Aceptar" />
     </div>
