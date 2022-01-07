@@ -66,17 +66,7 @@ namespace Petalos.Controllers
         public IActionResult AgregarImagenes(uint id)
         {
             FloresViewModel vm = new FloresViewModel();
-            //vm.Imagenesflores = Context.Imagenesflores.OrderBy(x => x.Nombreimagen).Where(x => x.Idflor == id);
-            //var flor = Context.Imagenesflores.Include(x => x.IdflorNavigation).FirstOrDefault(x => x.Idflor == id);
-            //vm.Datosflores = Context.Datosflores.FirstOrDefault(x => x.Idflor == id);
-            //var f = Context.Datosflores.Include(x=>x.Imagenesflores).FirstOrDefault(x => x.Idflor == id);
-            //if (f == null)
-            //{
-            //    return RedirectToAction("Index");
-            //}
-            //vm.imagenesflores = flor;
-            //vm.Datosflores = f;
-            //return View(vm);
+           
 
             var f = Context.Datosflores.Include(x => x.Imagenesflores).FirstOrDefault(x => x.Idflor == id);
             if (f == null)
